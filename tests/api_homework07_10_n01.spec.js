@@ -1,24 +1,24 @@
 const { test, expect } = require('@playwright/test');
 const { escape } = require('querystring');
 
+//Отправка GET-запроса:
 test('GET request', async ({ request }) => {
-
   const response = await request.get('https://dummyjson.com/products')
-
   const responseBody = await response.json()
   console.log(responseBody)
 
+//Проверка структуры ответа:
   expect(responseBody).toHaveProperty('products' && 'total')
-
   expect(Array.isArray(responseBody.products)).toBeTruthy()
-  expect(responseBody.products.length).toBeGreaterThan(0)
 
+//Работа с данными продуктов:
+  expect(responseBody.products.length).toBeGreaterThan(0)
   const id4 = responseBody.products[3];
   console.log("Четвертый продукт: ", id4);
-
   const rating = id4.rating
   expect(rating).toBe(2.51)
 
+//Проверка изображений продуктов:
   let pngFiles = [];
   let arrid4 = [id4];
 
@@ -49,6 +49,7 @@ test('GET request', async ({ request }) => {
     expect(pngFiles[i].endsWith(".png"))
   }
 
+//Работа с ценами продуктов:
   let arrPrice = []
   let sumPrice = 0.0
   for (let i = 0; i < responseBody.products.length; i ++) {
