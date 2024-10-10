@@ -48,7 +48,7 @@ test('GET request', async ({ request }) => {
   for (let i = 0; i < pngFiles.length; i ++) {
     expect(pngFiles[i].endsWith(".png"))
   }
-
+  
 //Работа с ценами продуктов:
   let arrPrice = []
   let sumPrice = 0.0
